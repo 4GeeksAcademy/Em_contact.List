@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			
 			demo: [
 				{
 					title: "FIRST",
@@ -16,18 +17,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 					title: "THIRD",
 					background: "white",
 					initial: "white"
-				}
-			]
+				},
+				{
+					title: "LUIS",
+					background: "white",
+					initial: "white"					
+				}								
+			],
+			contactsInfo:[]
 		},
 		actions: {
+			myGet: () =>{
+				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/DOM Emilio",)
+				.then( (response)=> response.json())
+				.then( (data)=> setStore({ contactsInfo: data })
+				// .then( (data)=> console.log(data))   				
+				)
+
+			},
+			
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
 			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+				console.log("its working!")
 			},
 			changeColor: (index, color) => {
 				//get the store
@@ -41,9 +55,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 
 				//reset the global store
-				setStore({ demo: demo });
+				setStore({ contactsInfo: data });
 			}
 		}
+		
 	};
 };
 
