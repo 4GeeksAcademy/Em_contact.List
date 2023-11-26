@@ -24,24 +24,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"					
 				}								
 			],
-			contactsInfo:[]
+			contactsInfo:[],
+			newContact:[{}]
 		},
 		actions: {
 			myGet: () =>{
-				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/DOM Emilio",)
+				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/DOM_Emilio",)
 				.then( (response)=> response.json())
 				.then( (data)=> setStore({ contactsInfo: data })
-				// .then( (data)=> console.log(data))   				
 				)
-
 			},
 			
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				console.log("its working!")
 			},
 			changeColor: (index, color) => {
 				//get the store
@@ -56,10 +52,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ contactsInfo: data });
+			},
+			  userGenerator: ()=> {
+				 
+				  fetch('https://playground.4geeks.com/apis/fake/contact/', {
+						method: 'POST',
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: {
+							"address": "47568 NW 34ST, 33434 FL, USA",
+							"agenda_slug": "DOM_Emilio",
+							"email": "RamonsitoSantitos@gmail.com",
+							"full_name": "Ramon Santos",
+							"phone": "7864445566"
+						}
+					})
+					      
+				},
+				addContact: ()=> {
+				 
+					fetch('https://playground.4geeks.com/apis/fake/contact/', {
+						  method: 'POST',
+						  headers: {
+							  "Content-Type": "application/json"
+						  },
+						  body: JSON.stringify(newContact),
+					  })
+							
+				  }
 			}
-		}
-		
+		};
 	};
-};
 
 export default getState;

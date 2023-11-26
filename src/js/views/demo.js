@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import ContactForm from "../views/contactForm.jsx";
 
 import { Context } from "../store/appContext";
 
@@ -33,10 +34,12 @@ export const Demo = () => {
 						</li>
 					);
 				})}
+
 			</ul>
 			<br />
+				<ContactForm />
 			<Link to="/">
-				<button className="btn btn-primary">Back home</button>
+				<button className="btn btn-primary">See all contacts</button>
 			</Link>
 		</div>
 	);
