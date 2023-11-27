@@ -7,14 +7,6 @@ export const listItem = () => {
 	
 	const {store, actions} = useContext(Context)
 
-	 function deleteThisContact() {				 
-	 	fetch('https://playground.4geeks.com/apis/fake/contact/'+contacto.id, {
-	 		  method: 'DELETE',
-	 		  body: ''
-	 	  })
-	 	    //alert(contacto.full_name + " has been deleted")
-	   }
-
 	return(
 		<div>
 			{store.contactsInfo.map((contacto)=>
@@ -37,7 +29,7 @@ export const listItem = () => {
 							<p>{contacto.email}</p>
 						</div>
 						<button
-							onClick={()=>{deleteThisContact(contacto.id)}}
+							onClick={()=>actions.deleteThisContact(contacto.id)}
 							type="button" 
 							className="btn btn-danger">
 							Delete
