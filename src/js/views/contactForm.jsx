@@ -3,28 +3,37 @@ import { Context } from "../store/appContext.js"
 // import "../../styles/contactForm.css";
 
 export const contactForm = () => {
-
-	
-	const [contactData, setContactData] = useState([{}])
-	
-	const [name, setName] = useState('');
-	const [address, setAddress] = useState('');
-	const [phone, setPhone] = useState('');
-	const [email, setEmail] = useState('');
-	
+	// Variables that save contact information 	
+	const [name, setName] = useState();
+	const [address, setAddress] = useState();
+	const [phone, setPhone] = useState();
+	const [email, setEmail] = useState();
+	// function that runs when "save contact" button is clicked.
 	function allActions(){
-		setContactData(contactData.concat(name,address,phone,email))
-		console.log(contactData)
-	}
-	function clearFields(){
-		setName('')
-		setAddress('')
-		setPhone('')
-		setEmail('')
-		setContactData('')
-	}
-
-
+		addContact()
+		setTimeout(() => {
+			setName('')
+			setAddress('')
+			setPhone('')
+			setEmail('')
+		}, 100);
+	}	
+	function addContact () {				 
+		fetch('https://playground.4geeks.com/apis/fake/contact/', {
+			  method: 'POST',
+			  headers: {
+				  "Content-Type": "application/json"
+			  },
+			  body: JSON.stringify({
+				"full_name": name,
+				"email": email,
+				"agenda_slug": "DOM_Emilio",
+				"address": address,
+				"phone": phone
+			}),
+		  })
+		  alert("Your contact has been succesfully created, go back home to see all your contacts")
+	  }
 	return(
 		<div className="text-center">
 			<ul>
@@ -106,12 +115,6 @@ export const contactForm = () => {
 				Save contact
 			</button>
 			<br />
-			<button
-				onClick={()=>clearFields()}
-				type="button" 
-				className="btn btn-primary">
-				Clear form
-			</button>
 		</div>
 		)
 	};
