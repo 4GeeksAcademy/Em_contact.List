@@ -7,6 +7,7 @@ export const listItem = () => {
 	
 	const {store, actions} = useContext(Context)
 
+
 	return(
 		<div>
 			{store.contactsInfo.map((contacto)=>
@@ -14,6 +15,11 @@ export const listItem = () => {
 					<div className="img d-flex">
 						<img scr={require("../../img/perro.jpeg")} alt="Esto es un perro"/>
 					</div>
+
+					<h2>{contacto.id}</h2>
+					
+				
+
 					<div className="container-fluid d-flex flex-column">
 						<h3>{contacto.full_name}</h3> 
 						<div className="d-flex">
@@ -28,6 +34,9 @@ export const listItem = () => {
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-envelope" viewBox="0 0 16 16">  				<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>				</svg> 
 							<p>{contacto.email}</p>
 						</div>
+						<button data={contacto.id} type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+								Launch demo modal
+						</button>
 						<button
 							onClick={()=>actions.deleteThisContact(contacto.id)}
 							type="button" 
@@ -37,6 +46,28 @@ export const listItem = () => {
 					</div>
 				</li>
 			)}
+
+			
+			<div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div className="modal-dialog">
+					<div className="modal-content">
+						<div className="modal-header">
+							<h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div className="modal-body">
+							<div className="mb-3">
+								<label htmlFor="recipient-name" className="col-form-label">Full Name</label>
+								<input type="text" className="form-control" id="recipient-name"/>
+							</div>
+						</div>
+						<div className="modal-footer">
+							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="button" className="btn btn-primary" onClick={(contacto)=>actions.contactPut(contacto.id)}>Save changes</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	)
 };

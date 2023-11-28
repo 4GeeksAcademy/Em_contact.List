@@ -1,6 +1,7 @@
 import React, {useContext, useState} from "react";
 import { Context } from "../store/appContext.js"
 // import "../../styles/contactForm.css";
+import { Link } from "react-router-dom";
 
 export const contactForm = () => {
 	const {store,actions} = useContext(Context)
@@ -33,7 +34,7 @@ export const contactForm = () => {
 						onChange={(e) =>setName(e.target.value)} 
 						value={name} 
 						aria-label="Username"
-						aria-describedby="addon-wrapping"/>
+						aria-describedby="addon-wrapping"/>						
 					</div>
 				</li>
 				<li>
@@ -91,12 +92,14 @@ export const contactForm = () => {
 				</li>
 			</ul>
 			<br></br>
-			<button
-				onClick={()=>allActions()}
-				type="button" 
-				className="btn btn-primary">
-				Save contact
-			</button>
+			<Link to="/demo">
+				<button
+					onClick={()=>allActions()}
+					type="button" 
+					className="btn btn-primary">
+					Save contact
+				</button>
+			</Link>
 			<br />
 		</div>
 		)

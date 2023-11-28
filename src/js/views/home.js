@@ -20,7 +20,7 @@ export const Home = () => {
 	
 	return(
 		<div className="Luigi text-center">
-			<h1>Add a new contact</h1>
+			<h1>Emilio's contact list</h1>
 			<ul className="list-group">
 				<ListItem />
 			</ul>
