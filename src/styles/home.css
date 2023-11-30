@@ -2,7 +2,7 @@ body {
     background-color: gray;
 }
 ul {
-    width: 40%;
+    width: 70%;
     margin: auto;
 }
 ul li{
@@ -10,4 +10,16 @@ ul li{
 }
 p {
     padding: none;
+}
+.Delete{
+    width: 25%;
+    margin-top: 25px;
+}
+h1 {
+    border: 5px solid black;
+    border-radius: 15px;
+    color: white;
+    width: fit-content;
+    margin: auto;
+    margin-bottom: 20px;
 }

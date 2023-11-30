@@ -44,12 +44,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			deleteThisContact: (index)=> {	
 			const store = getStore();		 
-			fetch('https://playground.4geeks.com/apis/fake/contact/' + index,{
-			method: 'DELETE',
-			body: ""})
+			fetch('https://playground.4geeks.com/apis/fake/contact/' + index,{method: 'DELETE', body: ""})
 			.then(data => setStore({ contactsInfo: store.contactsInfo.filter((item)=>item.id!==indexToDelete) }))
 			
-			alert(contacto.full_name + " has been deleted")
+			alert("Contact deleted")
 			},
 			addContact: (name,email,address,phone)=> {		
 				if(name || email || address || phone === null){
@@ -71,21 +69,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					alert("You need to fill all fields with your contact info before saving!")
 					}
 			},
-			contactPut: (contacto)=>{
+			contactPut: (id, editName, editAddress, editPhone, editEmail)=>{
 				const store = getStore();		 
-				fetch('https://playground.4geeks.com/apis/fake/contact/'+ contacto.id, {
-						method: 'PUT',
-						headers: {"Content-Type": "application/json"},
-						body: JSON.stringify({
-							"full_name": "El Marsiano",
-							"email": "email",
-							"agenda_slug": "DOM_Emilio",
-							"address": "address",
-							"phone": "phone"
-						}),
-						
-					})											
-				alert("Your contact has been succesfully edited")
+				fetch('https://playground.4geeks.com/apis/fake/contact/' + id, {
+					method: 'PUT',
+					headers: {"Content-Type": "application/json"},
+					body: JSON.stringify({
+						"full_name": editName,
+						"email": editEmail,
+						"agenda_slug": "DOM_Emilio",
+						"address": editAddress,
+						"phone": editPhone
+					}),					
+				})											
+				alert("Your contact has been succesfully edited")																	
 			},
 		}
 	};

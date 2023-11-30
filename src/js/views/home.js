@@ -27,7 +27,7 @@ export const Home = () => {
 			<button
 				onClick={()=>deleteAllContacts()}
 				type="button" 
-				className="btn btn-danger">
+				className="Delete btn btn-danger">
 				Delete all contacts
 			</button>
 		</div>
