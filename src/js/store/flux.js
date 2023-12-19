@@ -46,10 +46,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			const store = getStore();		 
 			fetch('https://playground.4geeks.com/apis/fake/contact/' + index,{method: 'DELETE', body: ""})
 			.then(data => setStore({ contactsInfo: store.contactsInfo.filter((item)=>item.id!==indexToDelete) }))
-			
 			alert("Contact deleted")
 			},
-			addContact: (name,email,address,phone)=> {		
+			addContact: (name,address,phone,email)=> {		
 				if(name || email || address || phone === null){
 					fetch('https://playground.4geeks.com/apis/fake/contact/', {
 						method: 'POST',
@@ -82,7 +81,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"phone": editPhone
 					}),					
 				})											
-				alert("Your contact has been succesfully edited")																	
+				alert("Your contact has been succesfully edited")																					
 			},
 		}
 	};

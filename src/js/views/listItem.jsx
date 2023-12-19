@@ -10,13 +10,15 @@ export const listItem = (contacto) => {
 	const [editAddress, setEditAddress] = useState();
 	const [editPhone, setEditPhone] = useState();
 	const [editEmail, setEditEmail] = useState();
-
+	
+	const [actualContact, setActualContact] = useState();
+	
 	return(
 		<div>			
 			{store.contactsInfo.map((contacto)=>
 				<li key={contacto.id} className="d-flex flex-row list-group-item">					
 					<div className="container-fluid d-flex flex-column">
-						<h3>{contacto.full_name}</h3> 
+						<h3>{contacto.full_name}</h3>
 						<div className="d-flex">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-house" viewBox="0 0 16 16"><path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/></svg>
 							<p>{contacto.address}</p>
@@ -31,58 +33,57 @@ export const listItem = (contacto) => {
 						</div>
 					</div>
 					<div className="flex-column align-items-center buttons">
-						<button data={contacto.id} type="button" className="modify btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+						<button onClick={()=>setActualContact(contacto.id)} type="button" className="modify btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
 								Modify
 						</button>
 						<button
 							onClick={()=>actions.deleteThisContact(contacto.id)}
-							type="button" 
+							type="button"
 							className="deleteContact btn btn-danger">
 							Delete
 						</button>
 					</div>
 				</li>
 	)}
-
 			{store.contactsInfo.map((item, index)=>
-				<div key={index} className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div key={contacto.id} className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div className="modal-dialog">
 						<div className="modal-content">
 							<div className="modal-header">
-								<h1 className="modal-title fs-5" id="exampleModalLabel">Edit your contact</h1>
+								<h1 className="modal-title fs-5 text-secondary" id="exampleModalLabel">Modify your contact</h1>
 								<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
 							<div className="modal-body">
 								<div className="mb-3">
 									<label htmlFor="recipient-name" className="col-form-label">Full Name</label>
-									<input type="text" className="form-control" id="recipient-name" defaultValue={item.full_name} onChange={(event)=> setEditName(event.target.value)} required/>
+									<input type="text" className="form-control" id="recipient-name" defaultValue={""} onChange={(event)=> setEditName(event.target.value)} required/>
 								</div>
 							</div>
 							<div className="modal-body">
 								<div className="mb-3">
 									<label htmlFor="recipient-name" className="col-form-label">Address</label>
-									<input type="text" className="form-control" id="recipient-name" defaultValue={item.address} onChange={(event)=> setEditAddress(event.target.value)} required/>
+									<input type="text" className="form-control" id="recipient-name" defaultValue={""} onChange={(event)=> setEditAddress(event.target.value)} required/>
 								</div>
 							</div>
 							<div className="modal-body">
 								<div className="mb-3">
 									<label htmlFor="recipient-name" className="col-form-label">Phone</label>
-									<input type="text" className="form-control" id="recipient-name" defaultValue={item.phone} onChange={(event)=> setEditPhone(event.target.value)} required/>
+									<input type="text" className="form-control" id="recipient-name" defaultValue={""} onChange={(event)=> setEditPhone(event.target.value)} required/>
 								</div>
 							</div>
 							<div className="modal-body">
 								<div className="mb-3">
 									<label htmlFor="recipient-name" className="col-form-label">Email</label>
-									<input type="text" className="form-control" id="recipient-name" defaultValue={item.email} onChange={(event)=> setEditEmail(event.target.value)} required/>
+									<input type="text" className="form-control" id="recipient-name" defaultValue={""} onChange={(event)=> setEditEmail(event.target.value)} required/>
 								</div>
 							</div>
 							<div className="modal-footer">
 								<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-								<button type="button" className="btn btn-primary" onClick={()=>actions.contactPut(item.id, editName, editAddress, editPhone, editEmail )}>Save changes</button>
+								<button type="button" className="btn btn-primary" onClick={()=>actions.contactPut(actualContact, editName, editAddress, editPhone, editEmail )}>Save changes</button>
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> 
 			)}
 		</div>
 	)
